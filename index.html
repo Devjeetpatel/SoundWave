@@ -20,8 +20,10 @@
 
         /* Hide scrollbar for IE, Edge and Firefox */
         * {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
         }
 
         * {
@@ -31,6 +33,10 @@
         }
 
         :root {
+            /* Default Theme Colors - Will be updated by JS */
+            --theme-color-1: #667eea;
+            --theme-color-2: #764ba2;
+
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -55,9 +61,17 @@
         }
 
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .container {
@@ -86,6 +100,21 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: -1px;
+        }
+
+        /* Mobile Logo Specifics */
+        .mobile-logo {
+            display: none;
+            /* Hidden on Desktop */
+            position: absolute;
+            top: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            /* Let clicks pass through if needed */
         }
 
         .wallet {
@@ -143,8 +172,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         .songs-grid {
@@ -233,8 +269,8 @@
             font-size: 15px;
             font-weight: 400;
         }
-        
-        /* NEW METADATA BADGE */
+
+        /* METADATA BADGE */
         .meta-badge-container {
             display: flex;
             gap: 6px;
@@ -254,7 +290,7 @@
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
-        
+
         .meta-badge.high-res {
             background: rgba(255, 215, 0, 0.15);
             border-color: rgba(255, 215, 0, 0.3);
@@ -265,7 +301,7 @@
             display: flex;
             gap: 12px;
             align-items: center;
-            margin-top: 15px; /* Added spacing */
+            margin-top: 15px;
         }
 
         .price {
@@ -382,7 +418,7 @@
             gap: 15px;
             margin-left: 20px;
         }
-        
+
         .player-action-btn {
             background: transparent;
             border: none;
@@ -399,7 +435,7 @@
 
         .player-action-btn:hover {
             color: white;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             transform: scale(1.1);
         }
 
@@ -443,8 +479,13 @@
         }
 
         @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .now-playing-info h4 {
@@ -512,6 +553,17 @@
             background: var(--accent-gradient);
             box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
             transition: all 0.3s ease, background 1.5s ease, box-shadow 1.5s ease;
+            /* ADDED: Center the new SVG icon */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        /* ADDED: Size for the new Play/Pause SVG icons */
+        .play-pause-btn svg {
+            width: 28px;
+            height: 28px;
         }
 
         .play-pause-btn:hover {
@@ -609,12 +661,21 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
+        /* CHANGED: Uses Dynamic CSS Variables from JS */
         .modal-content {
-            background: var(--primary-gradient);
+            background: linear-gradient(135deg, var(--theme-color-1), var(--theme-color-2));
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 45px;
             border-radius: 30px;
             max-width: 550px;
@@ -623,11 +684,20 @@
             overflow-y: auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: background 1s ease;
+            /* Smooth transition when colors change */
         }
 
         @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .modal-header {
@@ -696,23 +766,24 @@
             padding-top: 30px;
             border-top: 2px solid rgba(255, 255, 255, 0.3);
         }
-        
-        /* Cart Breakdown Styling */
+
         .cart-breakdown {
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 25px;
         }
+
         .breakdown-row {
             display: flex;
             justify-content: space-between;
             margin-bottom: 10px;
             font-size: 16px;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255, 255, 255, 0.8);
         }
+
         .breakdown-row.final {
-            border-top: 1px solid rgba(255,255,255,0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
             padding-top: 15px;
             margin-top: 15px;
             margin-bottom: 0;
@@ -788,7 +859,9 @@
             transition: transform 0.3s ease;
         }
 
-        .sidebar.hidden { transform: translateX(-100%); }
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
 
         .nav-item {
             display: flex;
@@ -815,7 +888,9 @@
             box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
         }
 
-        .nav-item-icon { font-size: 22px; }
+        .nav-item-icon {
+            font-size: 22px;
+        }
 
         .search-container {
             flex: 1;
@@ -856,8 +931,13 @@
             transition: margin-left 0.3s ease;
         }
 
-        .view-section { display: none; }
-        .view-section.active { display: block; }
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+        }
 
         .page-title {
             font-size: 42px;
@@ -897,8 +977,12 @@
             justify-content: center;
         }
 
+        /* CHANGED: Uses Dynamic CSS Variables from JS */
         .playlist-modal-content {
-            background: var(--primary-gradient);
+            background: linear-gradient(135deg, var(--theme-color-1), var(--theme-color-2));
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 40px;
             border-radius: 30px;
             max-width: 500px;
@@ -906,6 +990,7 @@
             max-height: 80vh;
             overflow-y: auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transition: background 1s ease;
         }
 
         .playlist-item {
@@ -976,12 +1061,16 @@
             flex-wrap: wrap;
         }
 
-        .stat-item { text-align: center; }
+        .stat-item {
+            text-align: center;
+        }
+
         .stat-value {
             font-size: 28px;
             font-weight: 700;
             color: #ffd700;
         }
+
         .stat-label {
             font-size: 14px;
             color: rgba(255, 255, 255, 0.7);
@@ -994,7 +1083,11 @@
             top: 20px;
             left: 20px;
             z-index: 100;
-            background: var(--accent-gradient);
+            /* CHANGED: Use dynamic theme colors for background */
+            background: linear-gradient(135deg, var(--theme-color-1), var(--theme-color-2));
+            /* ADDED: Glassmorphism effect for consistency */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: none;
             width: 50px;
             height: 50px;
@@ -1002,10 +1095,45 @@
             color: white;
             font-size: 24px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
+            /* ADDED: Center the SVG icon */
+            align-items: center;
+            justify-content: center;
+            padding: 0;
         }
-        
+
+        /* ADDED: Style for the hamburger SVG */
+        .sidebar-toggle svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Floating Cart Button (Mobile Only) */
+        .floating-cart-btn {
+            display: none;
+            /* Hidden on Desktop */
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            /* Match Sidebar Toggle Style */
+            background: linear-gradient(135deg, var(--theme-color-1), var(--theme-color-2));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
         /* Notification Toast */
         .notification-toast {
             position: fixed;
@@ -1018,25 +1146,33 @@
             color: white;
             font-weight: 600;
             z-index: 3000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transform: translateX(120%);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
             gap: 12px;
         }
+
         .notification-toast.show {
             transform: translateX(0);
         }
-        .notification-toast.success { border-left: 4px solid #43e97b; }
-        .notification-toast.error { border-left: 4px solid #ff0844; }
-        
+
+        .notification-toast.success {
+            border-left: 4px solid #43e97b;
+        }
+
+        .notification-toast.error {
+            border-left: 4px solid #ff0844;
+        }
+
         /* Confirmation Modal */
         .confirm-modal-content {
             text-align: center;
             max-width: 400px;
         }
+
         .confirm-actions {
             display: flex;
             gap: 15px;
@@ -1044,24 +1180,124 @@
         }
 
         @media (max-width: 768px) {
-            .sidebar { transform: translateX(-100%); }
-            .sidebar.visible { transform: translateX(0); }
-            .main-content { margin-left: 0; }
-            .sidebar-toggle { display: flex; align-items: center; justify-content: center; }
-            .player-content { grid-template-columns: 1fr; gap: 20px; }
-            .track-actions { margin-left: 0; }
-            .volume-control { justify-content: center; }
-            .songs-grid { grid-template-columns: 1fr; }
-            .search-container { max-width: 100%; }
-            .profile-header { flex-direction: column; text-align: center; gap: 20px; }
-            .profile-stats { justify-content: center; gap: 20px; }
-            body { padding-bottom: 220px; }
+            .sidebar {
+                transform: translateX(-100%);
+                width: 300px;
+            }
+
+            .sidebar.visible {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+
+            .logo {
+                padding-left: 55px;
+            }
+
+            /* ADDED: Ensure flex display for centering */
+            .sidebar-toggle {
+                display: flex;
+            }
+
+            .floating-cart-btn {
+                display: flex;
+            }
+
+            /* Show fixed cart on mobile */
+            .mobile-logo {
+                display: block;
+                font-size: 36px;
+                font-weight: 800;
+                background: linear-gradient(135deg, #fff 0%, #a8edea 50%, #fff 100%);
+                background-size: 200% auto;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                letter-spacing: -1px;
+            }
+
+            /* Show logo on mobile */
+
+            /* Hide Standard Header Wallet on Mobile */
+            .clear {
+                display: none;
+            }
+
+            /* Reorganize Header for Search Bar */
+            header {
+                flex-direction: column;
+                padding-top: 60px;
+                /* Make space for top fixed buttons/logo */
+            }
+
+            .search-container {
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .search-bar {
+                text-align: center;
+                padding-left: 20px;
+                /* Reset padding since icon is absolute */
+            }
+
+            .player-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .track-actions {
+                margin-left: 0;
+            }
+
+            .volume-control {
+                justify-content: center;
+            }
+
+            .songs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .profile-stats {
+                justify-content: center;
+                gap: 20px;
+            }
+
+            body {
+                padding-bottom: 220px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6H20M4 12H20M4 18H20" stroke="white" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+    </button>
+
+    <button class="floating-cart-btn" onclick="toggleCart()">
+        <span class="cart-count" id="floatingCartCount">0</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+    </button>
 
     <div class="sidebar" id="sidebar">
         <div class="logo" style="margin-bottom: 40px; font-size: 28px;">🎵 SoundWave</div>
@@ -1084,20 +1320,27 @@
     </div>
 
     <div class="main-content" id="mainContent">
+        <!-- <div class="mobile-logo">🎵 SoundWave</div> -->
+        <div class="mobile-logo" style="margin-bottom: 40px; font-size: 28px;">🎵 SoundWave</div>
+
+
         <header>
             <div class="search-container">
                 <input type="text" class="search-bar" id="searchBar" placeholder="Search songs, artists..."
                     oninput="handleSearch(event)">
                 <span class="search-icon">🔍</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
-                <div class="wallet">
-                    <button class="cart-btn" onclick="toggleCart()">
-                        🛒 Cart
-                        <span class="cart-count" id="cartCount">0</span>
-                    </button>
+            <div class="clear">
+                <div class="wallet" style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                    <div>
+                        <button class="cart-btn" onclick="toggleCart()">
+                            🛒 Cart
+                            <span class="cart-count" id="cartCount">0</span>
+                        </button>
+                    </div>
                 </div>
             </div>
+
         </header>
 
         <div class="view-section active" id="homeView">
@@ -1164,15 +1407,22 @@
                     <div class="lyrics-display" id="lyricsDisplay"></div>
                 </div>
                 <div class="track-actions">
-                    <button class="player-action-btn" id="playerLikeBtn" onclick="togglePlayerLike()" title="Like/Unlike">🤍</button>
-                    <button class="player-action-btn" id="playerPlaylistBtn" onclick="addToPlaylistFromPlayer()" title="Add to Playlist">➕</button>
+                    <button class="player-action-btn" id="playerLikeBtn" onclick="togglePlayerLike()"
+                        title="Like/Unlike">🤍</button>
+                    <button class="player-action-btn" id="playerPlaylistBtn" onclick="addToPlaylistFromPlayer()"
+                        title="Add to Playlist">➕</button>
                 </div>
             </div>
             <div class="player-controls">
                 <div class="control-buttons">
                     <button class="control-btn" onclick="prevSong()" title="Previous">⏮</button>
                     <button class="control-btn play-pause-btn" id="playPauseBtn" onclick="togglePlay()"
-                        title="Play/Pause">▶</button>
+                        title="Play/Pause">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 3L19 12L5 21V3Z" fill="white" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
                     <button class="control-btn" onclick="nextSong()" title="Next">⏭</button>
                 </div>
                 <div class="progress-container">
@@ -1200,7 +1450,7 @@
             </div>
             <div id="cartItems"></div>
             <div class="checkout-section" id="checkoutSection">
-                </div>
+            </div>
         </div>
     </div>
 
@@ -1224,26 +1474,32 @@
             </div>
             <div style="margin-bottom: 25px;">
                 <label style="display: block; margin-bottom: 10px; color: rgba(255,255,255,0.8);">Playlist Name</label>
-                <input type="text" id="newPlaylistName" class="search-bar" placeholder="My Awesome Mix" style="width: 100%;">
+                <input type="text" id="newPlaylistName" class="search-bar" placeholder="My Awesome Mix"
+                    style="width: 100%;">
             </div>
             <div style="display: flex; gap: 15px;">
-                <button class="btn" onclick="closeCreatePlaylistModal()" style="background: rgba(255,255,255,0.1); flex: 1;">Cancel</button>
-                <button class="btn" onclick="confirmCreatePlaylist()" style="background: var(--accent-gradient); color: white; flex: 1; box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);">Create</button>
+                <button class="btn" onclick="closeCreatePlaylistModal()"
+                    style="background: rgba(255,255,255,0.1); flex: 1;">Cancel</button>
+                <button class="btn" onclick="confirmCreatePlaylist()"
+                    style="background: var(--accent-gradient); color: white; flex: 1; box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);">Create</button>
             </div>
         </div>
     </div>
-    
+
     <div class="modal" id="confirmModal" style="z-index: 2300;">
         <div class="modal-content confirm-modal-content">
             <h2 style="margin-bottom: 15px;">Are you sure?</h2>
             <p id="confirmMessage" style="color: rgba(255,255,255,0.8);">Do you really want to do this?</p>
             <div class="confirm-actions">
-                <button class="btn" onclick="closeConfirmModal()" style="background: rgba(255,255,255,0.1); flex: 1;">Cancel</button>
-                <button id="confirmYesBtn" class="btn" style="background: #ff0844; color: white; flex: 1; box-shadow: 0 4px 15px rgba(255, 8, 68, 0.4);">Yes, Delete</button>
+                <button class="btn" onclick="closeConfirmModal()"
+                    style="background: rgba(255,255,255,0.1); flex: 1;">Cancel</button>
+                <button id="confirmYesBtn" class="btn"
+                    style="background: #ff0844; color: white; flex: 1; box-shadow: 0 4px 15px rgba(255, 8, 68, 0.4);">Yes,
+                    Delete</button>
             </div>
         </div>
     </div>
-    
+
     <div id="notificationToast" class="notification-toast">
         <span>✅</span>
         <span id="notificationText">Operation successful</span>
@@ -1254,40 +1510,40 @@
         // ============================================
         // UTILS: Notification & Confirmation
         // ============================================
-        
+
         function showNotification(message, type = 'success') {
             const toast = document.getElementById('notificationToast');
             const text = document.getElementById('notificationText');
-            
+
             toast.className = 'notification-toast ' + type;
             text.textContent = message;
-            
+
             const icon = toast.querySelector('span');
-            if(type === 'error') icon.textContent = '❌';
+            if (type === 'error') icon.textContent = '❌';
             else icon.textContent = '✅';
-            
+
             toast.classList.add('show');
-            
+
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
         }
-        
+
         let onConfirmAction = null;
-        
+
         function openConfirmModal(message, actionCallback) {
             document.getElementById('confirmMessage').textContent = message;
             onConfirmAction = actionCallback;
             document.getElementById('confirmModal').style.display = 'flex';
         }
-        
+
         function closeConfirmModal() {
             document.getElementById('confirmModal').style.display = 'none';
             onConfirmAction = null;
         }
-        
-        document.getElementById('confirmYesBtn').addEventListener('click', function() {
-            if(onConfirmAction) onConfirmAction();
+
+        document.getElementById('confirmYesBtn').addEventListener('click', function () {
+            if (onConfirmAction) onConfirmAction();
             closeConfirmModal();
         });
 
@@ -1295,7 +1551,7 @@
         // ============================================
         // UTILS: FLAC & Metadata Parser
         // ============================================
-        
+
         // Simple FLAC Header Parser to extract Bit Depth and Sample Rate
         function parseFlacMetadata(arrayBuffer) {
             try {
@@ -1320,22 +1576,22 @@
                 // Next 20 bits: Sample Rate.
                 // Next 3 bits: Channels - 1.
                 // Next 5 bits: Bits per sample - 1.
-                
+
                 // Bytes at 18, 19, 20 contain our info.
                 const b1 = data[18];
                 const b2 = data[19];
                 const b3 = data[20];
-                
+
                 // Sample Rate: (b1 << 12) | (b2 << 4) | ((b3 & 0xF0) >> 4)
                 const sampleRate = (b1 << 12) | (b2 << 4) | ((b3 & 0xF0) >> 4);
-                
+
                 // Channels: ((b3 & 0x0E) >> 1) + 1
                 const channels = ((b3 & 0x0E) >> 1) + 1;
-                
+
                 // Bits Per Sample: ((b3 & 0x01) << 4) | ((data[21] & 0xF0) >> 4) + 1
                 const b4 = data[21];
                 const bitsPerSample = (((b3 & 0x01) << 4) | ((b4 & 0xF0) >> 4)) + 1;
-                
+
                 return {
                     format: 'FLAC',
                     sampleRate: sampleRate,
@@ -1375,7 +1631,7 @@
         let volume = 0.7;
         let isMuted = false;
         let audioPlayer = null;
-        let nextSongId = 100; 
+        let nextSongId = 100;
 
         // New state variables
         let likedSongs = JSON.parse(localStorage.getItem('likedSongs')) || [];
@@ -1383,6 +1639,10 @@
         let currentView = 'home';
         let currentSearchQuery = '';
         let songToAddToPlaylist = null;
+
+        // CHANGED: Defined SVGs for Play and Pause icons
+        const PLAY_ICON_SVG = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 3L19 12L5 21V3Z" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        const PAUSE_ICON_SVG = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 4H10V20H6V4ZM14 4H18V20H14V4Z" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
         function arrayBufferToBase64(buffer) {
             let binary = '';
@@ -1413,11 +1673,11 @@
                         song.format = song.audioFile.split('.').pop().toUpperCase();
                         song.bitDepth = 16;
                     }
-                    
+
                     // 2. Parse ID3 Tags (Cover Art, Lyrics)
                     const blob = new Blob([buffer]);
                     song.size = blob.size; // Store size for bitrate calc
-                    
+
                     jsmediatags.read(blob, {
                         onSuccess: function (tag) {
                             const tags = tag.tags;
@@ -1441,7 +1701,7 @@
                             }
 
                             if (!song.emoji) song.emoji = "🎵";
-                            
+
                             // 3. Calculate Duration & Bitrate (Temp Audio Object)
                             // We need duration to calc bitrate (Size / Duration)
                             // This is a bit heavy, but since we have the blob, it's fast locally
@@ -1488,7 +1748,7 @@
                 const coverArtHtml = song.coverArt
                     ? `<img src="${song.coverArt}" alt="${song.title} cover" onerror="this.parentElement.innerHTML='<span class=\\'emoji-fallback\\'>${song.emoji || '🎵'}</span>'" />`
                     : `<span class="emoji-fallback">${song.emoji || '🎵'}</span>`;
-                
+
                 // METADATA BADGE LOGIC
                 // If bitrate/depth exists, show it. Otherwise hide.
                 let metaBadgeHtml = '';
@@ -1526,7 +1786,7 @@
         }
 
         // ... [REST OF YOUR FUNCTIONS: addToCart, updateCart, removeFromCart, toggleCart, checkout, finishCheckout, downloadSong, etc. REMAIN THE SAME] ...
-        
+
         // PASTE YOUR EXISTING LOGIC FOR CART AND PLAYING BELOW THIS LINE TO KEEP IT WORKING
         // (I will include the standard logic here for completeness)
 
@@ -1546,6 +1806,9 @@
 
         function updateCart() {
             document.getElementById('cartCount').textContent = cart.length;
+            // UPDATE BOTH DESKTOP AND MOBILE COUNTERS
+            document.getElementById('floatingCartCount').textContent = cart.length;
+
             const cartItems = document.getElementById('cartItems');
             const checkoutSection = document.getElementById('checkoutSection');
 
@@ -1559,7 +1822,7 @@
                 const song = songs.find(s => s.id === id);
                 return sum + song.price;
             }, 0);
-            
+
             const remainingBalance = balance - totalCost;
             const canAfford = remainingBalance >= 0;
 
@@ -1578,7 +1841,7 @@
                     </div>
                 `;
             }).join('');
-            
+
             checkoutSection.innerHTML = `
                 <div class="cart-breakdown">
                     <div class="breakdown-row">
@@ -1654,7 +1917,7 @@
             cart = [];
             const cartModal = document.getElementById('cartModal');
             const modalContent = cartModal.querySelector('.modal-content');
-            
+
             modalContent.innerHTML = `
                 <div class="modal-header">
                     <h2>Shopping Cart</h2>
@@ -1663,16 +1926,16 @@
                 <div id="cartItems"></div>
                 <div class="checkout-section" id="checkoutSection"></div>
             `;
-            
+
             document.getElementById('cartModal').style.display = 'none';
             updateCart();
             renderSongs();
             updateProfile();
             showView('home');
         }
-        
+
         // ... [Include other helper functions: downloadSong, formatTime, updateProgress, extractColorsFromImage, etc.] ...
-        
+
         function downloadSong(songId) {
             const song = songs.find(s => s.id === songId);
             // Simulate download
@@ -1720,7 +1983,7 @@
                     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                     const data = imageData.data;
                     const colorMap = {};
-                    const step = 5; 
+                    const step = 5;
                     for (let i = 0; i < data.length; i += step * 4) {
                         const r = data[i];
                         const g = data[i + 1];
@@ -1737,7 +2000,7 @@
                         callback(`rgb(${r1}, ${g1}, ${b1})`, `rgb(${r2}, ${g2}, ${b2})`);
                     } else if (sortedColors.length === 1) {
                         const [r, g, b] = sortedColors[0];
-                        callback(`rgb(${r}, ${g}, ${b})`, `rgb(${r+50}, ${g+50}, ${b+50})`);
+                        callback(`rgb(${r}, ${g}, ${b})`, `rgb(${r + 50}, ${g + 50}, ${b + 50})`);
                     } else {
                         callback('#667eea', '#764ba2');
                     }
@@ -1751,6 +2014,11 @@
             const body = document.body;
             body.style.background = `linear-gradient(135deg, ${color1} 0%, ${color2} 50%, ${color1} 100%)`;
             body.style.backgroundSize = '400% 400%';
+
+            // CHANGED: Update CSS Variables so Modals can use them
+            document.documentElement.style.setProperty('--theme-color-1', color1);
+            document.documentElement.style.setProperty('--theme-color-2', color2);
+
             body.classList.remove('dynamic-gradient');
             setTimeout(() => { body.classList.add('dynamic-gradient'); }, 100);
         }
@@ -1799,7 +2067,7 @@
 
             document.getElementById('nowPlayingTitle').textContent = song.title;
             document.getElementById('nowPlayingArtist').textContent = song.artist;
-            
+
             // Player Actions Update
             const likeBtn = document.getElementById('playerLikeBtn');
             likeBtn.innerHTML = isLiked(song.id) ? '❤️' : '🤍';
@@ -1834,7 +2102,8 @@
                 lyricsDisplay.classList.remove('active');
             }
 
-            document.getElementById('playPauseBtn').textContent = '⏸';
+            // CHANGED: Update button with Pause SVG instead of text
+            document.getElementById('playPauseBtn').innerHTML = PAUSE_ICON_SVG;
             showPlayer();
 
             audioPlayer.play().then(() => {
@@ -1846,13 +2115,14 @@
                 showNotification('Error playing audio', 'error');
             });
         }
-        
+
         function togglePlay() {
             if (!currentSong) { if (songs.length > 0) playSong(songs[0].id); return; }
             if (!audioPlayer) { playSong(currentSong.id); return; }
 
             isPlaying = !isPlaying;
-            document.getElementById('playPauseBtn').textContent = isPlaying ? '⏸' : '▶';
+            // CHANGED: Toggle between Play and Pause SVGs
+            document.getElementById('playPauseBtn').innerHTML = isPlaying ? PAUSE_ICON_SVG : PLAY_ICON_SVG;
 
             if (isPlaying) {
                 audioPlayer.play();
@@ -1864,7 +2134,7 @@
                 document.getElementById('musicPlayer').classList.remove('playing');
             }
         }
-        
+
         function seek(event) {
             if (!currentSong || !audioPlayer) return;
             const progressBar = document.getElementById('progressBar');
@@ -1941,7 +2211,7 @@
             if (index > -1) likedSongs.splice(index, 1);
             else likedSongs.push(songId);
             localStorage.setItem('likedSongs', JSON.stringify(likedSongs));
-            
+
             if (currentView === 'home') renderSongs();
             if (currentView === 'liked') renderLikedSongs();
             if (currentSong && currentSong.id === songId) {
@@ -1953,7 +2223,7 @@
         }
 
         function isLiked(songId) { return likedSongs.includes(songId); }
-        
+
         // Player Action Buttons
         function togglePlayerLike() { if (currentSong) toggleLike(currentSong.id); }
         function addToPlaylistFromPlayer() { if (currentSong) openPlaylistModal(currentSong.id); }
@@ -1972,18 +2242,18 @@
                 ? likedSongsList.filter(song => song.title?.toLowerCase().includes(currentSearchQuery))
                 : likedSongsList;
 
-             likedGrid.innerHTML = filtered.map(song => {
+            likedGrid.innerHTML = filtered.map(song => {
                 const owned = ownedSongs.includes(song.id);
                 const coverArtHtml = song.coverArt ? `<img src="${song.coverArt}" />` : `<span class="emoji-fallback">${song.emoji}</span>`;
                 let metaBadgeHtml = '';
                 if (song.bitrate && song.bitDepth) {
-                     const isHiRes = song.bitDepth > 16 || song.bitrate > 1000;
-                     metaBadgeHtml = `<div class="meta-badge-container"><span class="meta-badge">${song.format}</span><span class="meta-badge ${isHiRes?'high-res':''}">${song.bitDepth}-BIT</span><span class="meta-badge ${isHiRes?'high-res':''}">${song.bitrate} KBPS</span></div>`;
+                    const isHiRes = song.bitDepth > 16 || song.bitrate > 1000;
+                    metaBadgeHtml = `<div class="meta-badge-container"><span class="meta-badge">${song.format}</span><span class="meta-badge ${isHiRes ? 'high-res' : ''}">${song.bitDepth}-BIT</span><span class="meta-badge ${isHiRes ? 'high-res' : ''}">${song.bitrate} KBPS</span></div>`;
                 }
                 return `<div class="song-card"><div class="album-art">${coverArtHtml}</div><div class="song-info"><h3>${song.title}</h3><p>${song.artist}</p>${metaBadgeHtml}${owned ? '<div style="margin-top:5px;"><span class="owned">✓ Owned</span></div>' : ''}</div><div class="song-actions"><span class="price">$${song.price}</span><button class="btn play-btn" onclick="playSong(${song.id})">▶</button></div></div>`;
             }).join('');
         }
-        
+
         // Playlist Logic
         function openCreatePlaylistModal() {
             document.getElementById('newPlaylistName').value = '';
@@ -2038,21 +2308,88 @@
             renderPlaylistModal();
             updateProfile();
         }
-        
+
+        // function renderPlaylists() {
+        //     const playlistsGrid = document.getElementById('playlistsGrid');
+        //      if (playlists.length === 0) { playlistsGrid.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.7); padding: 40px; grid-column: 1/-1;">No playlists yet.</p>'; return; }
+        //      playlistsGrid.innerHTML = playlists.map(p => {
+        //          const pSongs = songs.filter(s => p.songs.includes(s.id));
+        //          const cover = pSongs.length > 0 && pSongs[0].coverArt ? `<img src="${pSongs[0].coverArt}"/>` : `<span class="emoji-fallback">🎵</span>`;
+        //          return `<div class="song-card" onclick="playPlaylist(${p.id})" style="cursor:pointer"><div class="album-art">${cover}</div><div class="song-info"><h3>${p.name}</h3><p>${p.songs.length} songs</p></div><div class="song-actions"><button class="btn add-cart-btn" onclick="event.stopPropagation(); deletePlaylist(${p.id})">🗑️ Delete</button></div></div>`;
+        //      }).join('');
+        // }
+
         function renderPlaylists() {
             const playlistsGrid = document.getElementById('playlistsGrid');
-             if (playlists.length === 0) { playlistsGrid.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.7); padding: 40px; grid-column: 1/-1;">No playlists yet.</p>'; return; }
-             playlistsGrid.innerHTML = playlists.map(p => {
-                 const pSongs = songs.filter(s => p.songs.includes(s.id));
-                 const cover = pSongs.length > 0 && pSongs[0].coverArt ? `<img src="${pSongs[0].coverArt}"/>` : `<span class="emoji-fallback">🎵</span>`;
-                 return `<div class="song-card" onclick="playPlaylist(${p.id})" style="cursor:pointer"><div class="album-art">${cover}</div><div class="song-info"><h3>${p.name}</h3><p>${p.songs.length} songs</p></div><div class="song-actions"><button class="btn add-cart-btn" onclick="event.stopPropagation(); deletePlaylist(${p.id})">🗑️ Delete</button></div></div>`;
-             }).join('');
+            if (playlists.length === 0) {
+                playlistsGrid.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.7); padding: 40px; grid-column: 1/-1;">No playlists yet. Create one above!</p>';
+                return;
+            }
+
+            playlistsGrid.innerHTML = playlists.map(playlist => {
+                const playlistSongs = songs.filter(s => playlist.songs.includes(s.id));
+                const coverArt = playlistSongs.length > 0 && playlistSongs[0].coverArt
+                    ? playlistSongs[0].coverArt
+                    : null;
+                const emoji = playlistSongs.length > 0 ? (playlistSongs[0].emoji || '🎵') : '🎵';
+
+                const coverArtHtml = coverArt
+                    ? `<img src="${coverArt}" alt="${playlist.name}" onerror="this.parentElement.innerHTML='<span class=\\'emoji-fallback\\'>${emoji}</span>'" />`
+                    : `<span class="emoji-fallback">${emoji}</span>`;
+
+                return `
+                    <div class="song-card" onclick="showPlaylistSongs(${playlist.id})" style="cursor: pointer;">
+                        <div class="album-art">${coverArtHtml}</div>
+                        <div class="song-info">
+                            <h3>${playlist.name}</h3>
+                            <p>${playlist.songs.length} songs</p>
+                        </div>
+                        <div class="song-actions">
+                            <button class="btn play-btn" onclick="event.stopPropagation(); playPlaylist(${playlist.id})">▶</button>
+                            <button class="btn add-cart-btn" onclick="event.stopPropagation(); deletePlaylist(${playlist.id})">🗑️ Delete</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
-        
+
+        function showPlaylistSongs(playlistId) {
+            const playlist = playlists.find(p => p.id === playlistId);
+            if (!playlist) return;
+
+            const playlistSongs = songs.filter(s => playlist.songs.includes(s.id));
+            const playlistGrid = document.getElementById('playlistsGrid');
+
+            playlistGrid.innerHTML = `
+                <div style="grid-column: 1/-1; margin-bottom: 20px;">
+                    <button class="btn add-cart-btn" onclick="renderPlaylists()" style="margin-bottom: 20px;">← Back to Playlists</button>
+                    <h2 class="section-title">${playlist.name}</h2>
+                </div>
+                ${playlistSongs.map(song => {
+                const owned = ownedSongs.includes(song.id);
+                const coverArtHtml = song.coverArt
+                    ? `<img src="${song.coverArt}" alt="${song.title} cover" onerror="this.parentElement.innerHTML='<span class=\\'emoji-fallback\\'>${song.emoji || '🎵'}</span>'" />`
+                    : `<span class="emoji-fallback">${song.emoji || '🎵'}</span>`;
+                return `
+                        <div class="song-card">
+                            <div class="album-art">${coverArtHtml}</div>
+                            <div class="song-info">
+                                <h3>${song.title || 'Unknown Title'}</h3>
+                                <p>${song.artist || 'Unknown Artist'}</p>
+                            </div>
+                            <div class="song-actions">
+                                <button class="btn play-btn" onclick="playSong(${song.id})">▶</button>
+                            </div>
+                        </div>
+                    `;
+            }).join('')}
+            `;
+        }
+
         function playPlaylist(playlistId) {
-             const playlist = playlists.find(p => p.id === playlistId);
-             if (playlist && playlist.songs.length > 0) playSong(playlist.songs[0]);
-             else showNotification('Playlist is empty', 'error');
+            const playlist = playlists.find(p => p.id === playlistId);
+            if (playlist && playlist.songs.length > 0) playSong(playlist.songs[0]);
+            else showNotification('Playlist is empty', 'error');
         }
 
         function deletePlaylist(playlistId) {
@@ -2080,7 +2417,7 @@
 
         // Load Metadata
         let loadedCount = 0;
-        const songsToLoad = songs.filter(song => !song.file); 
+        const songsToLoad = songs.filter(song => !song.file);
         const totalSongs = songsToLoad.length;
         if (totalSongs > 0) {
             document.getElementById('songsGrid').innerHTML = '<div style="text-align: center; padding: 40px; color: rgba(255,255,255,0.7);">Loading songs...</div>';
@@ -2095,4 +2432,5 @@
         }
     </script>
 </body>
+
 </html>
